@@ -2,7 +2,7 @@ from rest_framework import generics
 from rest_framework.parsers import MultiPartParser, FormParser
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import Post, Review, Useful, Project, Category
-from .serializers import PostSerializer, ReviewSerializer, UsefulSerializer, ProjectSerializer, CategorySerializer
+from .serializers import PostSerializer, ReviewSerializer, UsefulSerializer, ProjectSerializer, RecursiveCategorySerializer
 
 
 class PostList(generics.ListCreateAPIView):
@@ -57,4 +57,4 @@ class CategoryDetail(generics.RetrieveAPIView):
 
 class CategoryList(generics.ListAPIView):
     queryset = Category.objects.filter(parent=None)
-    serializer_class = CategorySerializer
+    serializer_class = RecursiveCategorySerializer
