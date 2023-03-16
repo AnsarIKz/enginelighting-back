@@ -1,7 +1,7 @@
 from rest_framework import generics
 from rest_framework.parsers import MultiPartParser, FormParser
 from .models import Post, Review, Useful, Project, Category
-from .serializers import PostSerializer, ReviewSerializer, UsefulSerializer, ProjectSerializer, RecursiveCategorySerializer
+from .serializers import PostSerializer, ReviewSerializer, UsefulSerializer, ProjectSerializer, RecursiveCategorySerializer, RequestSerializer
 
 
 class PostList(generics.ListCreateAPIView):

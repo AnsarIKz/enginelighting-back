@@ -1,6 +1,6 @@
 from .models import Review
 from rest_framework import serializers
-from .models import Post, PostPhoto, Useful, UsefulPhoto, Project, ProjectPhoto, Request
+from .models import Post, PostPhoto, Useful, UsefulPhoto, Project, ProjectPhoto, Request, Category
 
 
 class PostPhotoSerializer(serializers.ModelSerializer):
@@ -54,7 +54,7 @@ class ReviewSerializer(serializers.ModelSerializer):
         fields = ('id', 'image', 'created_at')
 
 
-class RequestSerializer(serializers.ModelSrtializer):
+class RequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Request
         exclude = ()
