@@ -25,7 +25,24 @@ SECRET_KEY = 'django-insecure-ldu=*rjx&73=q0ennkmgi9vx%!_bpmm9u!7ebrses+myc9xekv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_METHODS = ['DELETE', 'GET', 'OPTIONS', 'PATCH', 'POST', 'PUT', ]
+CORS_ALLOW_HEADERS = ['accept', 'accept-encoding', 'authorization', 'content-type',
+                      'dnt', 'origin', 'user-agent', 'x-csrftoken', 'x-requested-with', ]
+
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost',
+    'https://localhost',
+    'http://127.0.0.1',
+    'https://127.0.0.1',
+)
+
+CSRF_TRUSTED_ORIGINS = ['http://greenline-customers.com']
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # Application definition
@@ -37,6 +54,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # app
+    'core',
+
+    # second part
+    'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -115,7 +139,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/api/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+MEDIA_URL = '/api/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

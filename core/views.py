@@ -1,6 +1,5 @@
 from rest_framework import generics
 from rest_framework.parsers import MultiPartParser, FormParser
-from django_filters.rest_framework import DjangoFilterBackend
 from .models import Post, Review, Useful, Project, Category
 from .serializers import PostSerializer, ReviewSerializer, UsefulSerializer, ProjectSerializer, RecursiveCategorySerializer
 
