@@ -1,6 +1,6 @@
 from .models import Review
 from rest_framework import serializers
-from .models import Post, PostPhoto, Useful, UsefulPhoto, Project, ProjectPhoto, Request, Category
+from .models import Post, PostPhoto, Useful, UsefulPhoto, Project, ProjectPhoto, Request, Category, Product
 
 
 class PostPhotoSerializer(serializers.ModelSerializer):
@@ -77,12 +77,12 @@ class RequestSerializer(serializers.ModelSerializer):
 
 
 class CategorySerializer(serializers.ModelSerializer):
-    # children = serializers.SerializerMethodField()
-
     class Meta:
         model = Category
         fields = ('id', 'name', 'image')
 
-    # def get_children(self, obj):
-    #     serializer = self.__class__(obj.children.all(), many=True)
-    #     return serializer.data
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = '__all__'

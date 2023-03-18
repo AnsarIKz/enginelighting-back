@@ -1,8 +1,8 @@
 from django.http import Http404
 from rest_framework import generics
 from rest_framework.parsers import MultiPartParser, FormParser
-from .models import Post, Review, Useful, Project, Category
-from .serializers import PostSerializer, ReviewSerializer, UsefulSerializer, ProjectSerializer, CategorySerializer, RequestSerializer
+from .models import Post, Review, Useful, Project, Category, Product
+from .serializers import PostSerializer, ReviewSerializer, UsefulSerializer, ProjectSerializer, CategorySerializer, RequestSerializer, ProductSerializer
 
 
 class PostList(generics.ListCreateAPIView):
@@ -46,13 +46,19 @@ class CreateRequest(generics.CreateAPIView):
 
 # CATALOG
 
-class CategoryChildList(generics.ListAPIView):
-
-    serializer_class = CategorySerializer
-
+class CatalogList(generics.ListAPIView):
     def get_queryset(self):
         pk = self.kwargs.get('pk')
-        return Category.objects.filter(parent=pk)
+        queryset = Category.objects.filter(parent=pk)
+        if not queryset:
+            queryset = Product.objects.filter(category=pk)
+        return queryset
+
+    def get_serializer_class(self):
+        if Category.objects.filter(parent=self.kwargs.get('pk')).exists():
+            return CategorySerializer
+        else:
+            return ProductSerializer
 
 
 class CategoryList(generics.ListAPIView):

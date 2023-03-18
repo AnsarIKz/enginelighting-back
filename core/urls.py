@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import PostList, PostDetail, ReviewListView, ProjectList, ProjectDetail, UsefulList, UsefulDetail, CreateRequest, CategoryList, CategoryChildList
+from .views import PostList, PostDetail, ReviewListView, ProjectList, ProjectDetail, UsefulList, UsefulDetail, CreateRequest, CategoryList, CatalogList
 
 urlpatterns = [
     path('posts/', PostList.as_view()),
@@ -18,6 +18,6 @@ urlpatterns = [
     # CATALOG
 
     path("catalog/", CategoryList.as_view()),
-    path("catalog/<int:pk>/", CategoryChildList.as_view()),
+    path("catalog/<int:pk>/", CatalogList.as_view()),
 
 ]
