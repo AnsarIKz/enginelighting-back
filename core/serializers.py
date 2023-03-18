@@ -76,13 +76,13 @@ class RequestSerializer(serializers.ModelSerializer):
 #         fields = ('id', 'name', 'children')
 
 
-class RecursiveCategorySerializer(serializers.ModelSerializer):
-    children = serializers.SerializerMethodField()
+class CategorySerializer(serializers.ModelSerializer):
+    # children = serializers.SerializerMethodField()
 
     class Meta:
         model = Category
-        fields = ('id', 'name', 'children')
+        fields = ('id', 'name', 'image')
 
-    def get_children(self, obj):
-        serializer = self.__class__(obj.children.all(), many=True)
-        return serializer.data
+    # def get_children(self, obj):
+    #     serializer = self.__class__(obj.children.all(), many=True)
+    #     return serializer.data

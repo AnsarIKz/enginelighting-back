@@ -24,6 +24,9 @@ class PostPhoto(models.Model):
     image = models.ImageField(upload_to='post_images/')
     caption = models.CharField(max_length=200, blank=True, null=True)
 
+    def __str__(self):
+        return self.caption
+
 
 class Project(models.Model):
     title = models.CharField(max_length=200)
@@ -39,6 +42,9 @@ class ProjectPhoto(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='useful_images/')
     caption = models.CharField(max_length=200, blank=True, null=True)
+
+    def __str__(self):
+        return self.caption
 
 
 class Useful(models.Model):
@@ -57,6 +63,9 @@ class UsefulPhoto(models.Model):
     image = models.ImageField(upload_to='useful_images/')
     caption = models.CharField(max_length=200, blank=True, null=True)
 
+    def __str__(self):
+        return self.caption
+
 
 class Review(models.Model):
     image = models.ImageField(
@@ -73,6 +82,9 @@ class Category(models.Model):
     parent = models.ForeignKey(
         'self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
 
+    def __str__(self):
+        return self.name
+
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
@@ -84,3 +96,6 @@ class Product(models.Model):
         ("Image"), upload_to=None, height_field=None, width_field=None, max_length=None, blank=True, null=True)
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name='products')
+
+    def __str__(self):
+        return self.name

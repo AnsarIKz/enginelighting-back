@@ -1,7 +1,8 @@
+from django.http import Http404
 from rest_framework import generics
 from rest_framework.parsers import MultiPartParser, FormParser
 from .models import Post, Review, Useful, Project, Category
-from .serializers import PostSerializer, ReviewSerializer, UsefulSerializer, ProjectSerializer, RecursiveCategorySerializer, RequestSerializer
+from .serializers import PostSerializer, ReviewSerializer, UsefulSerializer, ProjectSerializer, CategorySerializer, RequestSerializer
 
 
 class PostList(generics.ListCreateAPIView):
@@ -45,15 +46,15 @@ class CreateRequest(generics.CreateAPIView):
 
 # CATALOG
 
-class CategoryDetail(generics.RetrieveAPIView):
-    queryset = Category.objects.all()
-    serializer_class = RecursiveCategorySerializer
+class CategoryChildList(generics.ListAPIView):
 
-    def get_object(self):
-        obj = super().get_object()
-        return obj.children.all()
+    serializer_class = CategorySerializer
+
+    def get_queryset(self):
+        pk = self.kwargs.get('pk')
+        return Category.objects.filter(parent=pk)
 
 
 class CategoryList(generics.ListAPIView):
     queryset = Category.objects.filter(parent=None)
-    serializer_class = RecursiveCategorySerializer
+    serializer_class = CategorySerializer
