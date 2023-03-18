@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import PostPhoto, Post, UsefulPhoto, Useful, Request, Category, Review, Project, ProjectPhoto
+from .models import PostPhoto, Post, UsefulPhoto, Useful, Request, Category, Review, Project, ProjectPhoto, Product
 # Register your models here.
 
 
@@ -34,3 +34,4 @@ admin.site.register(Useful, UsefulAdmin)
 admin.site.register(Request)
 admin.site.register(Category)
 admin.site.register(Review)
+admin.site.register(Product)

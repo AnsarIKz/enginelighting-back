@@ -44,7 +44,7 @@ class ProjectPhoto(models.Model):
 class Useful(models.Model):
     title = models.CharField(max_length=100)
     subtitle = models.CharField(max_length=200)
-    file = models.FileField(upload_to='useful_files/')
+    file = models.FileField(upload_to='useful_files/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -68,5 +68,19 @@ class Review(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
+    image = models.ImageField(
+        ("Фото Категории"), upload_to=None, height_field=None, width_field=None, max_length=None, blank=True, null=True)
     parent = models.ForeignKey(
         'self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+
+
+class Product(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True, null=True)
+    body_material = models.CharField(max_length=100, blank=True, null=True)
+    wind_region = models.CharField(max_length=100, blank=True, null=True)
+    coating = models.CharField(max_length=100, blank=True, null=True)
+    image = models.ImageField(
+        ("Image"), upload_to=None, height_field=None, width_field=None, max_length=None, blank=True, null=True)
+    category = models.ForeignKey(
+        Category, on_delete=models.CASCADE, related_name='products')
