@@ -98,9 +98,9 @@ class Product(models.Model):
     coating = models.CharField(
         ('Покрытие'), max_length=255, blank=True, null=True)
     luminous_flux = models.CharField(
-        ("Световой поток"), max_length=255, blank=True, null=True)
+        ("Световой поток, лм"), max_length=255, blank=True, null=True)
     power_consumption = models.CharField(
-        ("Потребляемость ВТ"), max_length=255, blank=True, null=True)
+        ("Потребляемость, вт"), max_length=255, blank=True, null=True)
     operating_voltage = models.CharField(
         ("Рабочее напряжение "), max_length=255, blank=True, null=True)
     plinth_type = models.CharField(
@@ -111,7 +111,8 @@ class Product(models.Model):
         ("Степень защиты"), max_length=50, blank=True, null=True)
     length = models.CharField(
         ("Длина, мм"), max_length=50, blank=True, null=True)
-    size = models.CharField(("Размер"), max_length=50, blank=True, null=True)
+    size = models.CharField(
+        ("Размер, ДxШxВ"), max_length=50, blank=True, null=True)
     height = models.CharField(("Высота"), max_length=50, blank=True, null=True)
     bracket_outreach = models.CharField(
         ("Вылет кронштейна"), max_length=50, blank=True, null=True)
