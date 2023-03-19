@@ -40,7 +40,7 @@ class Project(models.Model):
 
 class ProjectPhoto(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='useful_images/')
+    image = models.ImageField(upload_to='project_images/')
     caption = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
@@ -78,7 +78,7 @@ class Review(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(
-        ("Фото Категории"), upload_to=None, height_field=None, width_field=None, max_length=None, blank=True, null=True)
+        ("Фото Категории"), upload_to='category_images/', height_field=None, width_field=None, max_length=None, blank=True, null=True)
     parent = models.ForeignKey(
         'self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
 
@@ -87,15 +87,39 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField(blank=True, null=True)
-    body_material = models.CharField(max_length=100, blank=True, null=True)
-    wind_region = models.CharField(max_length=100, blank=True, null=True)
-    coating = models.CharField(max_length=100, blank=True, null=True)
+    name = models.CharField(max_length=255)
+    description = models.TextField(('Описание'), blank=True, null=True)
+
+    # ADDITIONAL FIELDs
+    body_material = models.CharField(
+        ('Материал корпуса'), max_length=255, blank=True, null=True)
+    wind_region = models.CharField(
+        ('Ветровой район'), max_length=255, blank=True, null=True)
+    coating = models.CharField(
+        ('Покрытие'), max_length=255, blank=True, null=True)
+    luminous_flux = models.CharField(
+        ("Световой поток"), max_length=255, blank=True, null=True)
+    power_consumption = models.CharField(
+        ("Потребляемость ВТ"), max_length=255, blank=True, null=True)
+    operating_voltage = models.CharField(
+        ("Рабочее напряжение "), max_length=255)
+    plinth_type = models.CharField(("Тип цоколя"), max_length=255)
+    led_generation = models.CharField(("Поколение светодиодов"), max_length=50)
+    protection_level = models.CharField(("Степень защиты"), max_length=50)
+    length = models.CharField(("Длина, мм"), max_length=50)
+    size = models.CharField(("Размер"), max_length=50)
+    height = models.CharField(("Высота"), max_length=50)
+    bracket_outreach = models.CharField(("Вылет кронштейна"), max_length=50)
+    distance_between_holes = models.CharField(
+        ("Расстояние между посадочными отверстиями для закладной, мм"), max_length=50)
+    profile_tube_size = models.CharField(
+        ("Размер профильной трубы, мм"), max_length=50)
+    #
     image = models.ImageField(
-        ("Image"), upload_to=None, height_field=None, width_field=None, max_length=None, blank=True, null=True)
+        ("Image"), upload_to='product_images/', height_field=None, width_field=None, max_length=None, blank=True, null=True)
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name='products')
 
-    def __str__(self):
-        return self.name
+
+def __str__(self):
+    return self.name
