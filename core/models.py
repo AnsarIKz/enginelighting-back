@@ -49,7 +49,7 @@ class ProjectPhoto(models.Model):
 
 class Useful(models.Model):
     title = models.CharField(max_length=100)
-    subtitle = models.CharField(max_length=200)
+    subtitle = models.TextField()
     file = models.FileField(upload_to='useful_files/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

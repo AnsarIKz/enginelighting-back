@@ -18,7 +18,7 @@ class PostDetail(generics.RetrieveAPIView):
     serializer_class = PostSerializer
 
 
-class UsefulList(generics.ListCreateAPIView):
+class UsefulList(generics.ListAPIView):
     queryset = Useful.objects.all()
     serializer_class = UsefulSerializer
 
@@ -28,7 +28,7 @@ class UsefulDetail(generics.RetrieveAPIView):
     serializer_class = UsefulSerializer
 
 
-class ProjectList(generics.ListCreateAPIView):
+class ProjectList(generics.ListAPIView):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
 

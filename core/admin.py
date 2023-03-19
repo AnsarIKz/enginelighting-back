@@ -40,8 +40,9 @@ class ProductAdmin(admin.ModelAdmin):
 # Images
 admin.site.register(Post, PostAdmin)
 admin.site.register(Useful, UsefulAdmin)
+admin.site.register(Project, ProjectAdmin)
+admin.site.register(Product, ProductAdmin)
 
 admin.site.register(Request)
 admin.site.register(Category)
 admin.site.register(Review)
-admin.site.register(Product, ProductAdmin)
