@@ -102,23 +102,28 @@ class Product(models.Model):
     power_consumption = models.CharField(
         ("Потребляемость ВТ"), max_length=255, blank=True, null=True)
     operating_voltage = models.CharField(
-        ("Рабочее напряжение "), max_length=255)
-    plinth_type = models.CharField(("Тип цоколя"), max_length=255)
-    led_generation = models.CharField(("Поколение светодиодов"), max_length=50)
-    protection_level = models.CharField(("Степень защиты"), max_length=50)
-    length = models.CharField(("Длина, мм"), max_length=50)
-    size = models.CharField(("Размер"), max_length=50)
-    height = models.CharField(("Высота"), max_length=50)
-    bracket_outreach = models.CharField(("Вылет кронштейна"), max_length=50)
+        ("Рабочее напряжение "), max_length=255, blank=True, null=True)
+    plinth_type = models.CharField(
+        ("Тип цоколя"), max_length=255, blank=True, null=True)
+    led_generation = models.CharField(
+        ("Поколение светодиодов"), max_length=50, blank=True, null=True)
+    protection_level = models.CharField(
+        ("Степень защиты"), max_length=50, blank=True, null=True)
+    length = models.CharField(
+        ("Длина, мм"), max_length=50, blank=True, null=True)
+    size = models.CharField(("Размер"), max_length=50, blank=True, null=True)
+    height = models.CharField(("Высота"), max_length=50, blank=True, null=True)
+    bracket_outreach = models.CharField(
+        ("Вылет кронштейна"), max_length=50, blank=True, null=True)
     distance_between_holes = models.CharField(
-        ("Расстояние между посадочными отверстиями для закладной, мм"), max_length=50)
+        ("Расстояние между посадочными отверстиями для закладной, мм"), max_length=50, blank=True, null=True)
     profile_tube_size = models.CharField(
-        ("Размер профильной трубы, мм"), max_length=50)
+        ("Размер профильной трубы, мм"), max_length=50, blank=True, null=True)
     #
     image = models.ImageField(
         ("Image"), upload_to='product_images/', height_field=None, width_field=None, max_length=None, blank=True, null=True)
     category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, related_name='products')
+        Category, on_delete=models.CASCADE, related_name='products', blank=True, null=True)
 
 
 def __str__(self):
