@@ -83,6 +83,16 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    is_product = serializers.SerializerMethodField()
+
     class Meta:
         model = Product
         fields = '__all__'
+
+    def get_is_product(self, obj):
+        return True
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['is_product'] = self.get_is_product(instance)
+        return data

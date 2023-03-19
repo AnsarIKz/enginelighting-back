@@ -1,3 +1,6 @@
+from rest_framework.views import APIView
+from .models import Category
+from rest_framework.response import Response
 from django.http import Http404
 from rest_framework import generics
 from rest_framework.parsers import MultiPartParser, FormParser
@@ -10,7 +13,7 @@ class PostList(generics.ListCreateAPIView):
     serializer_class = PostSerializer
 
 
-class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+class PostDetail(generics.RetrieveAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
@@ -20,7 +23,7 @@ class UsefulList(generics.ListCreateAPIView):
     serializer_class = UsefulSerializer
 
 
-class UsefulDetail(generics.RetrieveUpdateDestroyAPIView):
+class UsefulDetail(generics.RetrieveAPIView):
     queryset = Useful.objects.all()
     serializer_class = UsefulSerializer
 
@@ -30,7 +33,7 @@ class ProjectList(generics.ListCreateAPIView):
     serializer_class = ProjectSerializer
 
 
-class ProjectDetail(generics.RetrieveUpdateDestroyAPIView):
+class ProjectDetail(generics.RetrieveAPIView):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
 
@@ -64,3 +67,28 @@ class CatalogList(generics.ListAPIView):
 class CategoryList(generics.ListAPIView):
     queryset = Category.objects.filter(parent=None)
     serializer_class = CategorySerializer
+
+
+class CategoryParentsView(APIView):
+    def get(self, request, pk):
+        try:
+            category = Category.objects.get(id=pk)
+            parents = self.get_all_parents(category)
+            parent_names = [{'name': parent.name, 'id': parent.id}
+                            for parent in parents]
+            parent_names.insert(0, {'name': category.name, 'id': category.id})
+            return Response(parent_names)
+        except Category.DoesNotExist:
+            return Response({'error': 'Category does not exist'})
+
+    def get_all_parents(self, category):
+        parents = []
+        if category.parent is not None:
+            parents.append(category.parent)
+            parents += self.get_all_parents(category.parent)
+        return parents
+
+
+class ProductDetail(generics.RetrieveAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
