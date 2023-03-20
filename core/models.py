@@ -10,6 +10,9 @@ class Request(models.Model):
     additional_text = models.CharField(
         ("Дополнительное поле"), max_length=50, blank=True, null=True)
 
+    def __str__(self):
+        return self.full_name
+
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
@@ -122,12 +125,15 @@ class Product(models.Model):
         ("Расстояние между посадочными отверстиями для закладной, мм"), max_length=50, blank=True, null=True)
     profile_tube_size = models.CharField(
         ("Размер профильной трубы, мм"), max_length=50, blank=True, null=True)
+    curve_power_light = models.CharField(
+        ("Кривая Силы Света"), max_length=50, blank=True, null=True)
+    light_angle = models.CharField(
+        ("Угол светового потока, градусы"), max_length=50, blank=True, null=True)
     #
     image = models.ImageField(
         ("Image"), upload_to='product_images/', height_field=None, width_field=None, max_length=None, blank=True, null=True)
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name='products', blank=True, null=True)
 
-
-def __str__(self):
-    return self.name
+    def __str__(self):
+        return self.name

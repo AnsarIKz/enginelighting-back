@@ -89,6 +89,11 @@ class CategoryParentsView(APIView):
         return parents
 
 
+class ProductList(generics.ListAPIView):
+    queryset = Product.objects.order_by('id')[:10]
+    serializer_class = ProductSerializer
+
+
 class ProductDetail(generics.RetrieveAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
