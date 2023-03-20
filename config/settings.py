@@ -36,7 +36,7 @@ CORS_ALLOW_HEADERS = ['accept', 'accept-encoding', 'authorization', 'content-typ
                       'dnt', 'origin', 'user-agent', 'x-csrftoken', 'x-requested-with', ]
 
 CORS_ORIGIN_WHITELIST = (
-    'http://localhost',
+    'http://localhost:3000',
     'https://localhost',
     'http://127.0.0.1',
     'https://127.0.0.1',

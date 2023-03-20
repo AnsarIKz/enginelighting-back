@@ -7,6 +7,8 @@ from django.db import models
 class Request(models.Model):
     full_name = models.CharField(("Full Name"), max_length=255)
     phone = models.CharField(("Phone"), max_length=25)
+    additional_text = models.CharField(
+        ("Дополнительное поле"), max_length=50, blank=True, null=True)
 
 
 class Post(models.Model):
