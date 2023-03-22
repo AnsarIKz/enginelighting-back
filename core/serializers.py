@@ -6,7 +6,7 @@ from .models import Post, PostPhoto, Useful, UsefulPhoto, Project, ProjectPhoto,
 class PostPhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = PostPhoto
-        fields = ('id', 'post', 'image', 'caption')
+        fields = ('id', 'image', 'caption')
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -21,7 +21,7 @@ class PostSerializer(serializers.ModelSerializer):
 class UsefulPhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = UsefulPhoto
-        fields = ('id', 'post', 'image', 'caption')
+        fields = ('id', 'image', 'caption')
 
 
 class UsefulSerializer(serializers.ModelSerializer):
@@ -36,11 +36,11 @@ class UsefulSerializer(serializers.ModelSerializer):
 class ProjectPhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProjectPhoto
-        fields = ('id', 'post', 'image', 'caption')
+        fields = ('id', 'image', 'caption')
 
 
 class ProjectSerializer(serializers.ModelSerializer):
-    photos = ProjectPhotoSerializer(many=True, read_only=True)
+    photos = ProjectPhotoSerializer(many=True)
 
     class Meta:
         model = Project

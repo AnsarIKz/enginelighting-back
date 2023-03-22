@@ -25,7 +25,8 @@ class Post(models.Model):
 
 
 class PostPhoto(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(
+        Post, on_delete=models.CASCADE, related_name='photos')
     image = models.ImageField(upload_to='post_images/')
     caption = models.CharField(max_length=200, blank=True, null=True)
 
@@ -44,7 +45,8 @@ class Project(models.Model):
 
 
 class ProjectPhoto(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    project = models.ForeignKey(
+        Project, on_delete=models.CASCADE, related_name='photos')
     image = models.ImageField(upload_to='project_images/')
     caption = models.CharField(max_length=200, blank=True, null=True)
 
@@ -64,7 +66,8 @@ class Useful(models.Model):
 
 
 class UsefulPhoto(models.Model):
-    useful = models.ForeignKey(Useful, on_delete=models.CASCADE)
+    useful = models.ForeignKey(
+        Useful, on_delete=models.CASCADE, related_name='photos')
     image = models.ImageField(upload_to='useful_images/')
     caption = models.CharField(max_length=200, blank=True, null=True)
 
