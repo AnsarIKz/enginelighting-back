@@ -10,7 +10,7 @@ class PostPhotoSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    photos = PostPhotoSerializer(many=True, read_only=True)
+    photos = PostPhotoSerializer(many=True)
 
     class Meta:
         model = Post
@@ -25,7 +25,7 @@ class UsefulPhotoSerializer(serializers.ModelSerializer):
 
 
 class UsefulSerializer(serializers.ModelSerializer):
-    photos = UsefulPhotoSerializer(many=True, read_only=True)
+    photos = UsefulPhotoSerializer(many=True)
 
     class Meta:
         model = Useful
