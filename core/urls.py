@@ -2,8 +2,8 @@ from django.urls import path, include
 from .views import PostList, PostDetail, ReviewListView, ProjectList, ProjectDetail, UsefulList, UsefulDetail, CreateRequest, CategoryList, CatalogList, CategoryParentsView, ProductDetail, ProductList
 
 urlpatterns = [
-    path('posts/', PostList.as_view()),
-    path('posts/<int:pk>/', PostDetail.as_view()),
+    path('post/', PostList.as_view()),
+    path('post/<int:pk>/', PostDetail.as_view()),
 
     path("project/", ProjectList.as_view()),
     path("project/<int:pk>/", ProjectDetail.as_view()),
