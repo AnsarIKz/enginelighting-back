@@ -13,8 +13,10 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import os
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+USE_X_FORWARDED_HOST = True
 
 
 # Quick-start development settings - unsuitable for production
@@ -24,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ldu=*rjx&73=q0ennkmgi9vx%!_bpmm9u!7ebrses+myc9xekv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
@@ -42,7 +44,7 @@ CORS_ORIGIN_WHITELIST = (
     'https://127.0.0.1',
 )
 
-# CSRF_TRUSTED_ORIGINS = ['http://greenline-customers.com']
+# CSRF_TRUSTED_ORIGINS = ['']
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
@@ -108,6 +110,7 @@ DATABASES = {
     }
 }
 
+ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
