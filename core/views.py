@@ -6,6 +6,14 @@ from rest_framework import generics
 from rest_framework.parsers import MultiPartParser, FormParser
 from .models import Post, Review, Useful, Project, Category, Product
 from .serializers import PostSerializer, ReviewSerializer, UsefulSerializer, ProjectSerializer, CategorySerializer, RequestSerializer, ProductSerializer
+import telebot
+
+bot = telebot.TeleBot(token='5803280798:AAG1llHaBuRg5IrKK6foV15ZQmlXQKEFURk')
+chat_id = '-967463798'
+
+
+def send_telegram_message(message):
+    bot.send_message(chat_id=chat_id, text=message)
 
 
 class PostList(generics.ListCreateAPIView):
@@ -45,6 +53,13 @@ class ReviewListView(generics.ListAPIView):
 
 class CreateRequest(generics.CreateAPIView):
     serializer_class = RequestSerializer
+
+    def create(self, request, *args, **kwargs):
+        response = super().create(request, *args, **kwargs)
+        instance = response.data
+        message = f'New request:\nFull name: {instance["full_name"]}\nPhone: {instance["phone"]}\nAdditional text: {instance["additional_text"]}'
+        send_telegram_message(message)
+        return response
 
 
 # CATALOG
